@@ -28,4 +28,8 @@ Results are persistently stored
 # Web Server access
 IP address : 3.134.124.64
 
-SSH command : ssh -i [key pair file] ubuntu@3.134.124.64
+SSH command : ssh -i [key pair file] ubuntu@cs-260-ldt.click
+
+# How to update Simon App
+
+./deployFiles.sh -k ~/keys/production.pem -h yourdomain.click -s simon
