@@ -39,3 +39,66 @@ menu .nav-item {
 footer a {
   float: right;
 }
+
+.banner {
+  background-color: #6c1305;
+  color: #a48f5b;
+}
+
+.secondary {
+  background-color: #998e8c;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.btn {
+  width: 140px;
+  height: 50px;
+  background: linear-gradient(to top, #a48f5b, #6c1305, #a48f5b);
+  color: #fff;
+  border-radius: 100px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.btn span {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: top 0.5s;
+}
+
+.btn-text-one {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  color:#fff;
+}
+
+.btn-text-two {
+  position: absolute;
+  width: 100%;
+  top: 150%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.btn:hover .btn-text-one {
+  top: -100%;
+}
+
+.btn:hover .btn-text-two {
+  top: 50%;
+}
