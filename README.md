@@ -28,8 +28,14 @@ Results are persistently stored
 # Web Server access
 IP address : 3.134.124.64
 
-SSH command : ssh -i [key pair file] ubuntu@cs-260-ldt.click
+SSH command : ssh -i [key pair file] ubuntu@cs260ldt.click
 
 # How to update Simon App
 
 ./deployFiles.sh -k ~/keys/production.pem -h yourdomain.click -s simon
+
+# UI Colors
+Primary - #6c1305
+Secondary - #ae8881
+Tertiary - #a48f5b
+Neutral - #998e8c
