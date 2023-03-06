@@ -7,7 +7,7 @@ function vote() {
                 restaurant = radio.value;
             }
         });
-    if (nameEl.value != ""){
+    if (nameEl.value != "" && restaurant != null){
         saveUserVotes(nameEl.value, restaurant);
         updateResults();
     
