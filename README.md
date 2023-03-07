@@ -39,3 +39,87 @@ Primary - #6c1305
 Secondary - #ae8881
 Tertiary - #a48f5b
 Neutral - #998e8c
+
+# MidTermNotes
+let a = ['cow', 'rat', 'fish'];
+<br>let b = a.filter(v => v.match(/A|f/i));
+<br>console.log(b);
+<br> -> ['rat', 'fish']
+
+"< div >" - Creates a division element
+
+The CSS property padding 
+<br> p {
+    <br>padding: 1em;
+<br>}
+<br> -> Puts space around the content of selected elements
+
+To point to another DNS record, you should use the following DNS record type - CNAME - An alias for another record
+
+You can use import url(....); to load fonts from google
+
+Promises get put on the side burner to execute while everything else is happening
+
+Valid JSON {"x":3} - undefined is not a valid JSON object
+
+Using CSS how would you turn only the BYU text blue? - div.header {color:blue;} (div specifies the div element specifically)
+
+Which of the following is not valid JavaScript in HTML - < javascript >1+1</ javascript >
+
+What does the following code output - FILL ME IN
+
+Which of the following is not a valid JavaScript function? - function f(x)={}
+
+The CSS property padding; Peanut butter and mayonnaise, Pals before marriage
+
+What is the order of the CSS box model, starting from the outside going in - margin, border, padding, content
+
+What does the following code output - cow:rat:fish
+<br> let a = ['cow', 'rat', 'fish'];
+<br> let b = a.reduce((a,v) => [a,v].join(':'));
+<br> console.log(b);
+
+What is the HTML tag for an unordered list? - < ul > --- < li > - list item
+
+What does the following code do - adds a mouseover event listener to a p element.
+<br> document.querySelector('p').addEventListener('mouseover', console.log);
+
+Which HTML will create a valid hyperlink? - < a href='...' > x < /a > 
+
+What does the following code ouput? - ['a1', 'a2', 'a3'] - Javascript looks at a string + int leads to making a string
+<br> let a = [1, 2, 3];
+<br> e = a.map(number => {
+    <br> return ('a' + number)
+<br>});
+<br> console.log(e);
+
+Map function takes an array and maps the value of the array to another array according to the callback function you give it
+
+What will the following output? - A D B - await blocks execution until the async happens
+<br>const a = async function() {
+    <br>return new Promise((resolve, reject) => {
+        <br>setTimeout(() => {console.log('D'); resolve(true)}, 10000);
+    <br>})
+<br>}
+<br>
+<br>try {
+    <br>console.log('A');
+    <br>await a();
+    <br>console.log('B');
+<br>} catch(e) {
+    <br>console.log('C');
+<br>}
+
+What does the DOM textContent property do? - Sets the child text for the element
+
+Which of the following is a DNS subdomain? - c260.cs.byu.edu - Whole extended url is the subdomain
+
+How will the hello world be oriented? - Two lines with the first saying world and the second saying hello
+
+Executing the following will output - 4
+<br> const f = y => ++y;
+<br> console.log(f(3));
+
+Which of the following is a valid JS object? - { n:1 } - DON'T USE EQUALS SIGNS - JS objects don't require quotes
+
+The following console command makes a script executable - chmod +x deploy.sh - chmod +x changes it to make it executable
