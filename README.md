@@ -123,3 +123,7 @@ Executing the following will output - 4
 Which of the following is a valid JS object? - { n:1 } - DON'T USE EQUALS SIGNS - JS objects don't require quotes
 
 The following console command makes a script executable - chmod +x deploy.sh - chmod +x changes it to make it executable
+
+# Services
+deployServices and deployFiles are different... Be sure to use the right one when deploying
+
