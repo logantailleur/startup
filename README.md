@@ -127,3 +127,5 @@ The following console command makes a script executable - chmod +x deploy.sh - c
 # Services
 deployServices and deployFiles are different... Be sure to use the right one when deploying
 
+$ Database
+If the environment variables need to change, remember to update them in the remote shell for the server.
