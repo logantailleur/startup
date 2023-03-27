@@ -133,3 +133,6 @@ If the environment variables need to change, remember to update them in the remo
 $ Login
 Make sure to use pm2 restart all --update-env
 pm2 save every now and then to make sure the data is being saved to my database when I update the website
+
+$ Websocket
+This could be really useful for my startup. I sort of picture if working similarly to how it works in the simon app, but instead it will broadcast the votes that are placed.
