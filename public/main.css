@@ -1,0 +1,104 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-width: 375px;
+}
+
+header {
+  flex: 0 80px;
+}
+
+main {
+  flex: 1 calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+footer {
+  flex: 0 30px;
+}
+
+menu {
+  flex: 1;
+  display: flex;
+  flex-direction: row !important;
+  list-style: none;
+}
+
+.navbar-brand {
+  padding-left: 0.3em;
+  border-bottom: solid rgb(182,182,182) thin;
+}
+
+menu .nav-item {
+  padding: 0 0.3em;
+}
+
+footer a {
+  float: right;
+}
+
+.banner {
+  background-color: #6c1305;
+  color: #a48f5b;
+}
+
+.secondary {
+  background-color: #998e8c;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.btn {
+  width: 140px;
+  height: 50px;
+  background: linear-gradient(to top, #a48f5b, #6c1305, #a48f5b);
+  color: #fff;
+  border-radius: 100px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.btn span {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: top 0.5s;
+}
+
+.btn-text-one {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  color:#fff;
+}
+
+.btn-text-two {
+  position: absolute;
+  width: 100%;
+  top: 150%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.btn:hover .btn-text-one {
+  top: -100%;
+}
+
+.btn:hover .btn-text-two {
+  top: 50%;
+}
