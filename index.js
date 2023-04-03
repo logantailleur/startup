@@ -1,13 +1,16 @@
 const express = require('express');
 const app = express();
+const DB = require('./database.js');
+const cookieParser = require('cookie-parser');
+const bcrypt = require('bcrypt');
 
 // The service port. In production the application is statically hosted by the service on the same port.
-const port = process.argv.length > 2 ? process.argv[2] : 3000;
+const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 // JSON body parsing using built-in middleware
 app.use(express.json());
 
-// Serve up the application's static content
+// Serve up the applications static content
 app.use(express.static('public'));
 
 // Router for service endpoints
@@ -15,13 +18,43 @@ var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 // GetScores
-apiRouter.get('/userVotes', (_req, res) => {
+apiRouter.get('/userVotes', async (_req, res) => {
+  const scores = await DB.getHighScores();
   res.send(scores);
 });
 
+apiRouter.post('/auth/create', async (req, res) => {
+  if (await DB.getUser(req.body.email)) {
+    res.status(409).send({ msg: 'Existing user' });
+  } else {
+    const user = await DB.createUser(req.body.email, req.body.password);
+
+    // Set the cookie
+    // setAuthCookie(res, user.token);
+
+    res.send({
+      id: user._id,
+    });
+  }
+});
+
+// GetAuth token for the provided credentials
+apiRouter.post('/auth/login', async (req, res) => {
+  const user = await DB.getUser(req.body.email);
+  if (user) {
+    if (await bcrypt.compare(req.body.password, user.password)) {
+      // setAuthCookie(res, user.token);
+      res.send({ id: user._id });
+      return;
+    }
+  }
+  res.status(401).send({ msg: 'Unauthorized' });
+});
+
 // SubmitScore
-apiRouter.post('/userVotes', (req, res) => {
-  scores = updateScores(req.body, scores);
+apiRouter.post('/userVotes', async (req, res) => {
+  await DB.addVote(req.body);
+  const scores = await DB.getVotes();
   res.send(scores);
 });
 
@@ -30,30 +63,16 @@ app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
+// setAuthCookie in the HTTP response
+function setAuthCookie(res, authToken) {
+  res.cookie(authCookieName, authToken, {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+}
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
-// updateScores considers a new score for inclusion in the high scores.
-// The high scores are saved in memory and disappear whenever the service is restarted.
-let scores = [];
-function updateScores(newScore, scores) {
-  let found = false;
-  for (const [i, prevScore] of scores.entries()) {
-    if (newScore.score > prevScore.score) {
-      scores.splice(i, 0, newScore);
-      found = true;
-      break;
-    }
-  }
-
-  if (!found) {
-    scores.push(newScore);
-  }
-
-  if (scores.length > 10) {
-    scores.length = 10;
-  }
-
-  return scores;
-}

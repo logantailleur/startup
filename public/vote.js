@@ -1,6 +1,8 @@
+const GameEndEvent = 'gameEnd';
+const GameStartEvent = 'gameStart';
+
 function vote() {
-    var nameEl = document.querySelector("#inputName");
-    var passwordEl = document.querySelector("#password")
+    var nameEl = localStorage.getItem('userName');
     var restaurant = null;
     document.getElementsByName('voteButton')
         .forEach(radio => {
@@ -8,11 +10,11 @@ function vote() {
                 restaurant = radio.value;
             }
         });
-    if (nameEl.value != "" && restaurant != null && passwordEl != ""){
+    if (nameEl.value != "" && restaurant != null && passwordEl != "") {
         saveUserVotes(nameEl.value, restaurant, passwordEl);
         updateResults();
-    
-        // window.location.href = "results.html";
+
+        window.location.href = "results.html";
     }
 }
 
@@ -29,28 +31,28 @@ function updateResults() {
 
 function updateRestResults(votes) {
     let newResults = [];
-    var newLine = {Restaurant: "McDonald's", Votes: getVotes(votes, "McDonald's")};
+    var newLine = { Restaurant: "McDonald's", Votes: getVotes(votes, "McDonald's") };
     newResults.push(newLine);
 
-    newLine = {Restaurant: "Zaxby's", Votes: getVotes(votes, "Zaxby's")};
+    newLine = { Restaurant: "Zaxby's", Votes: getVotes(votes, "Zaxby's") };
     newResults.push(newLine);
 
-    newLine = {Restaurant: "KFC", Votes: getVotes(votes, "KFC")};
+    newLine = { Restaurant: "KFC", Votes: getVotes(votes, "KFC") };
     newResults.push(newLine);
 
-    newLine = {Restaurant: "Sonic", Votes: getVotes(votes, "Sonic")};
+    newLine = { Restaurant: "Sonic", Votes: getVotes(votes, "Sonic") };
     newResults.push(newLine);
 
-    newLine = {Restaurant: "JCW's", Votes: getVotes(votes, "JCW's")};
+    newLine = { Restaurant: "JCW's", Votes: getVotes(votes, "JCW's") };
     newResults.push(newLine);
 
-    newLine = {Restaurant: "Popeye's", Votes: getVotes(votes, "Popeye's")};
+    newLine = { Restaurant: "Popeye's", Votes: getVotes(votes, "Popeye's") };
     newResults.push(newLine);
 
-    newLine = {Restaurant: "Raising Cane's", Votes: getVotes(votes, "Raising Cane's")};
+    newLine = { Restaurant: "Raising Cane's", Votes: getVotes(votes, "Raising Cane's") };
     newResults.push(newLine);
 
-    newLine = {Restaurant: "Chick-fil-a", Votes: getVotes(votes, "Chick-fil-a")};
+    newLine = { Restaurant: "Chick-fil-a", Votes: getVotes(votes, "Chick-fil-a") };
     newResults.push(newLine);
 
     // console.log("rest results");
@@ -58,9 +60,9 @@ function updateRestResults(votes) {
     return newResults;
 }
 
-function getVotes(votes, restName){
+function getVotes(votes, restName) {
     var total = 0;
-    for(const [i, prev] of votes.entries()) {
+    for (const [i, prev] of votes.entries()) {
         if (prev.Restaurant === restName) {
             total = total + 1;
         }
@@ -120,4 +122,38 @@ function updateUserVotes(userName, restaurant, results) {
     }
 
     return newTable;
+}
+
+function configureWebSocket() {
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    this.socket.onopen = (event) => {
+        this.displayMsg('system', 'game', 'connected');
+    };
+    this.socket.onclose = (event) => {
+        this.displayMsg('system', 'game', 'disconnected');
+    };
+    this.socket.onmessage = async (event) => {
+        const msg = JSON.parse(await event.data.text());
+        if (msg.type === GameEndEvent) {
+            this.displayMsg('player', msg.from, `scored ${msg.value.score}`);
+        } else if (msg.type === GameStartEvent) {
+            this.displayMsg('player', msg.from, `started a new game`);
+        }
+    };
+}
+
+function displayMsg(cls, from, msg) {
+    const chatText = document.querySelector('#player-messages');
+    chatText.innerHTML =
+        `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + chatText.innerHTML;
+}
+
+function broadcastEvent(from, type, value) {
+    const event = {
+        from: from,
+        type: type,
+        value: value,
+    };
+    this.socket.send(JSON.stringify(event));
 }
