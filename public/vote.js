@@ -1,8 +1,10 @@
 const GameEndEvent = 'gameEnd';
 const GameStartEvent = 'gameStart';
 
-function vote() {
+async function vote() {
+    debugger
     var nameEl = localStorage.getItem('userName');
+    console.log(nameEl);
     var restaurant = null;
     document.getElementsByName('voteButton')
         .forEach(radio => {
@@ -10,8 +12,10 @@ function vote() {
                 restaurant = radio.value;
             }
         });
-    if (nameEl.value != "" && restaurant != null && passwordEl != "") {
-        saveUserVotes(nameEl.value, restaurant, passwordEl);
+    console.log(restaurant);
+    if (nameEl != "" && restaurant != null) {
+        var results = await saveUserVotes(nameEl, restaurant);
+        await updateDB(nameEl, restaurant);
         updateResults();
 
         window.location.href = "results.html";
@@ -73,12 +77,23 @@ function getVotes(votes, restName) {
 async function saveUserVotes(userName, restaurant) {
     let results = [];
 
+    // try {
+    //     const response = await fetch('api/deleteVote', {
+    //         method: 'post',
+    //         headers: { 'content-type' : 'application/json' },
+    //         body: JSON.stringify(userName),
+    //     });
+    // } catch {
+    //     console.log("didn't work");
+    // }
+
     //First get the results so the user can be overwritten
     try {
-        const response = await fetch('api/userVotes');
+        const response = await fetch('api/getUserVotes');
         results = await response.json();
         localStorage.setItem('userVotes', JSON.stringify(results));
     } catch {
+        console.log("caught at get");
         const votesText = localStorage.getItem('userVotes');
         if (votesText) {
             results = JSON.parse(votesText);
@@ -87,18 +102,21 @@ async function saveUserVotes(userName, restaurant) {
 
     //Second update the results with the user's new vote
     results = updateUserVotes(userName, restaurant, results);
+    return results;
 
+}
+
+async function updateDB(nameEl, restaurant) {
     //Third post the results
+    const newResult = { User: nameEl, Restaurant: restaurant };
     try {
-        const response = await fetch('api/userVotes', {
-            method: 'POST',
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify(results),
+        const response = await fetch('api/updateUserVotes', {
+            method: 'put',
+            headers: { 'content-type':'application/json' },
+            body: JSON.stringify(newResult),
         });
-        const results = await response.json();
-        localStorage.setItem('userVotes', JSON.stringify(results));
     } catch {
-        localStorage.setItem('userVotes', JSON.stringify(results));
+        console.log("caught at post");
     }
 }
 
@@ -121,6 +139,7 @@ function updateUserVotes(userName, restaurant, results) {
         newTable.push(newResult);
     }
 
+    localStorage.setItem('userVotes', JSON.stringify(newTable));
     return newTable;
 }
 

@@ -34,20 +34,21 @@ async function createUser(userName, password) {
     };
     await userCollection.insertOne(user);
 
+    var input = {User: userName, Restaurant: "restaurant"};
+
+    await voteCollection.insertOne(input);
+
     return user;
 }
 
 function addVote(vote) {
-  voteCollection.insertOne(vote);
+  var output = voteCollection.updateOne(
+    { "User" : vote.User },
+    { $set: {"Restaurant" : vote.Restaurant}});
 }
 
 function getVotes() {
-  const query = {};
-  const options = {
-    sort: { score: -1 },
-    limit: 10,
-  };
-  const cursor = voteCollection.find(query, options);
+  const cursor = voteCollection.find();
   return cursor.toArray();
 }
 

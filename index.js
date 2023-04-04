@@ -17,10 +17,10 @@ app.use(express.static('public'));
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-// GetScores
-apiRouter.get('/userVotes', async (_req, res) => {
-  const scores = await DB.getHighScores();
-  res.send(scores);
+// Get votes
+apiRouter.get('/getUserVotes', async (_req, res) => {
+  const votes = await DB.getVotes();
+  res.send(votes);
 });
 
 apiRouter.post('/auth/create', async (req, res) => {
@@ -51,11 +51,11 @@ apiRouter.post('/auth/login', async (req, res) => {
   res.status(401).send({ msg: 'Unauthorized' });
 });
 
-// SubmitScore
-apiRouter.post('/userVotes', async (req, res) => {
+// Submit votes
+apiRouter.put('/updateUserVotes', async (req, res) => {
   await DB.addVote(req.body);
-  const scores = await DB.getVotes();
-  res.send(scores);
+  const votes = await DB.getVotes();
+  res.send(votes);
 });
 
 // Return the application's default page if the path is unknown
