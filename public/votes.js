@@ -1,8 +1,16 @@
-function loadScores(){
+async function loadScores(){
     let scores = [];
-    const scoresText = localStorage.getItem('userVotes');
-    if (scoresText) {
-        scores = JSON.parse(scoresText);
+
+    try {
+        const response = await fetch('/api/getUserVotes');
+        scores = await response.json();
+        localStorage.setItem('userVotes', JSON.stringify(scores));
+    } catch {
+        console.log("caught at get");
+        const votesText = localStorage.getItem('userVotes');
+        if (votesText) {
+            scores = JSON.parse(votesText);
+        }
     }
 
     const tableBodyEl = document.querySelector('#userVotes');
