@@ -136,3 +136,6 @@ pm2 save every now and then to make sure the data is being saved to my database 
 
 # Websocket
 This could be really useful for my startup. I sort of picture if working similarly to how it works in the simon app, but instead it will broadcast the votes that are placed.
+
+# React
+Make sure to run npm install create-react-app before deploying when I begin working on my startup for react
