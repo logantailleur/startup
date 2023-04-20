@@ -139,3 +139,15 @@ This could be really useful for my startup. I sort of picture if working similar
 
 # React
 Make sure to run npm install create-react-app before deploying when I begin working on my startup for react
+
+# Notes for Final
+Cookies allow a server to store data on the client
+
+Which is not a standard HTTP header: Language
+
+You can use fetch in front-end and back-end : TRUE
+
+What is not a purpose of jsx: To combine CSS, HTML, and JavaScript
+
+WHich express middleware will match this fetch request![Screenshot 2023-04-20 at 10 18 28 AM](https://user-images.githubusercontent.com/122576833/233426979-735a055f-6fcc-41d6-a8c4-80bf7dc53e64.jpg)
+app.delete(\fac/\(.*)\, () => {})
