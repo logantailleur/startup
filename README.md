@@ -149,5 +149,36 @@ You can use fetch in front-end and back-end : TRUE
 
 What is not a purpose of jsx: To combine CSS, HTML, and JavaScript
 
-WHich express middleware will match this fetch request![Screenshot 2023-04-20 at 10 18 28 AM](https://user-images.githubusercontent.com/122576833/233426979-735a055f-6fcc-41d6-a8c4-80bf7dc53e64.jpg)
-app.delete(\fac/\(.*)\, () => {})
+Which express middleware will match this fetch request
+![Screenshot 2023-04-20 at 10 18 28 AM](https://user-images.githubusercontent.com/122576833/233426979-735a055f-6fcc-41d6-a8c4-80bf7dc53e64.jpg)
+app.delete(/fav\/(.*)/, () => {})
+
+Which of the following is not true about linux daemon? Cannot fork other processes
+
+Why is hashing stored passwords imporant? It improves security by making the password unreadable
+
+![Screenshot 2023-04-20 at 10 27 43 AM](https://user-images.githubusercontent.com/122576833/233429252-e86be843-4a98-4939-a978-8201eb9abd99.jpg)
+B
+
+What value does Websocket add to HTTP? It is peer to peer instead of client to server.
+
+![Screenshot 2023-04-20 at 10 30 36 AM](https://user-images.githubusercontent.com/122576833/233429985-ed9bedb0-ecf3-4d8f-ba4d-e732ea07b925.jpg)
+tacofish
+
+For the request [GET] /fav/george what is logged? 
+![Screenshot 2023-04-20 at 10 43 32 AM](https://user-images.githubusercontent.com/122576833/233432944-b44ae8af-0753-44cd-800e-d9b444b7c219.jpg)
+paul george john
+
+Port 80 is reserved for HTTP
+
+HTTPS 443, SSH 22
+
+Given the following code what will console.log print?![Screenshot 2023-04-20 at 10 48 22 AM](https://user-images.githubusercontent.com/122576833/233434080-034304d0-4e4c-4131-9a32-32163a0b6cc4.jpg)
+Client:Server:Hello
+
+What document matches this mongoDB query? { $or: [{name:/J.*/}, {score: {$lt:3}}]} -> {name: Walke, score: -55}
+
+HTTP status codes in the 300 range are for Content redirects or caching
+
+What does the command NPM install ws not do? Adds template code for websockets to your JavaScript
+
